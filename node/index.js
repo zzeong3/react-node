@@ -4,8 +4,6 @@ const mongoose = require('mongoose'); // 라이브러리
 const app = express();
 const port = 8888;
 
-const {Post} = require('./model/postSchema.js')
-
 //express에서 react안쪽 build폴더까지의 경로를 static으로 지정
 app.use(express.static(path.join(__dirname, '../react/build')));
 
@@ -13,6 +11,8 @@ app.use(express.static(path.join(__dirname, '../react/build')));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+//community 전용 라우터 연결
+app.use('/api/community', require('./router/communityRouter.js'));
 
 app.listen(port, () => {
   mongoose
@@ -34,21 +34,3 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../react/build/index.html'));
 })
 
-//리액트로 부터 받은 요청처리
-app.post('/api/create', (req, res) => {
-    console.log(req.body);
-
-    const PostModel = new Post({
-        title : req.body.title,
-        content : req.body.content
-    })
-
-    PostModel.save()
-        .then(() => {
-            res.json({success : true})
-        })
-        .catch(err => {
-            console.log(err);
-            res.json({success : false})
-        })
-})
