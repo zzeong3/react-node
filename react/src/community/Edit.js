@@ -41,7 +41,6 @@ function Edit() {
         axios.post('/api/community/detail', item)
             .then((res)=>{
                 if(res.data.success) {
-                    console.log(res.data.detail);
                     setDetail(res.data.detail);
                 }
             })
