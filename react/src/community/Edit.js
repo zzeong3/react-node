@@ -14,6 +14,7 @@ function Edit() {
     const [Detail, setDetail] = useState({});
     const [Title, setTitle] = useState('');
     const [Content, setContent] = useState('');
+    const [Loaded, setLoaded] = useState(false);
 
     const handleUpdate = () => {
         if(Title.trim() === '' || Content.trim() === '') return alert('모든 항목을 입력하세요.')
@@ -50,20 +51,26 @@ function Edit() {
     useEffect(()=>{
         setTitle(Detail.title);
         setContent(Detail.content);
+        setLoaded(true);
     },[Detail])
 
     return (
         <Layout name={'Edit'}>
-            <label htmlFor="title">Title</label>
-            <input type="text" value={Title || ''} id='title' onChange={e=>setTitle(e.target.value)} />
-
-            <label htmlFor="content">content</label>
-            <textarea name="content" id="content" cols="30" rows="4" value={Content || ''} onChange={e=>setContent(e.target.value)}></textarea>
-
-            <BtnSet>
-                <button onClick={()=>navigate(-1)}>cancle</button>
-                <button onClick={handleUpdate}>update</button>
-            </BtnSet>
+            {Loaded ? (
+                <>
+                    <label htmlFor="title">Title</label>
+                    <input type="text" value={Title || ''} id='title' onChange={e=>setTitle(e.target.value)} />
+        
+                    <label htmlFor="content">content</label>
+                    <textarea name="content" id="content" cols="30" rows="4" value={Content || ''} onChange={e=>setContent(e.target.value)}></textarea>
+        
+                    <BtnSet>
+                        <button onClick={()=>navigate(-1)}>cancle</button>
+                        <button onClick={handleUpdate}>update</button>
+                    </BtnSet>
+                </>
+            ) :<p>Loading . . .</p>}
+            
         </Layout>
     )
 }
