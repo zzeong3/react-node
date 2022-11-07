@@ -37,7 +37,7 @@ router.post('/create', (req, res) => {
 
 });
 
-//read
+//read 글을 불러오는
 router.post('/read', (req, res) => {
     Post.find()
       .exec()
@@ -62,4 +62,22 @@ router.post('/read', (req, res) => {
       })
   });
 
+
+  //edit
+  router.post('/edit', (req, res)=>{
+    const temp = {
+      title : req.body.content,
+      content : req.body.content
+    }
+
+    Post.updateOne({communityNum: req.body.num}, {$set: temp})
+      .exec()
+      .then(()=>{
+        res.json({success: true})
+      })
+      .catch(err=>{
+        console.log(err)
+        res.json({success:false})
+      })
+  })
 module.exports = router;

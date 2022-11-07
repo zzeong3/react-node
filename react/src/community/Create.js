@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 function Create() {
     const navigate = useNavigate();
     const [Tit, setTit] = useState('');
-	const [Con, setCon] = useState('');
+	  const [Con, setCon] = useState('');
 
 	const handeCreate = () => {
         if(Tit.trim() === '' || Con.trim() === '') return alert('제목과 본문을 모두 입력하세요.');
