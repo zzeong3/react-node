@@ -25,11 +25,12 @@ function List() {
                 }
             })
             .catch(err => console.log(err))
+            .finally(()=>setLoaded(true));
     }, [])
 
-    useEffect(()=>{
-        List.length !== 0 && setLoaded(true);
-    },[List])
+    // useEffect(()=>{
+    //     List.length !== 0 && setLoaded(true);
+    // },[List])
 
 
     return (
