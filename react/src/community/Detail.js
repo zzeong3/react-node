@@ -21,6 +21,7 @@ function Detail() {
     // 라우터 파라미터로 전달되느 값을 받음
     const params = useParams();
     const [Detail, setDetail] = useState({});
+    const [Loaded, setLoaded] = useState(false);
     const item = {
         num:params.num
     }
@@ -50,10 +51,14 @@ function Detail() {
             .catch(err => console.log(err))
     },[])
 
-    return (
-        
+    useEffect(()=>{
+        Object.keys(Detail).length !== 0 && setLoaded(true);
+    },[Detail])
+
+
+    return (    
         <Layout name={'Detail'}>
-            {Detail && (
+            {Detail && Loaded ? (
                 <>
                     <DetailWrap>
                         <h2>{Detail.title}</h2>
@@ -65,9 +70,10 @@ function Detail() {
                         <button onClick={handleDelete}>Delete</button>
                     </BtnSet>
                 </>
-            )}
-        </Layout>
-        
+            )
+                :<p>Loading . . .</p>
+            }
+        </Layout>   
     )
 }
 
