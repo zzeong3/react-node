@@ -50,7 +50,8 @@ function Edit() {
     useEffect(()=>{
         setTitle(Detail.title);
         setContent(Detail.content);
-        setLoaded(true);
+        //setLoaded(true);
+        Object.keys(Detail).length !== 0 && setLoaded(true); // 키값에 length 값이 0이 아닐때 true
     },[Detail])
 
     return (
