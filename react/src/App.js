@@ -6,8 +6,29 @@ import Create from "./community/Create";
 import Detail from './community/Detail';
 import Edit from './community/Edit';
 import GlobalStyle from './GlobalStyle';
+import Join from './user/Join';
+import Login from './user/Login';
+import firebase from './firebase';
+import {useEffect} from 'react';
+import {useDispatch} from 'react-redux';
+import {loginUser, logoutUser} from './redux/userSlice';
+
 
 function App() {
+	const dispatch =useDispatch();
+	useEffect(() => {
+		//firebase로 현재 auth 상태변화를 감지해서 파라미터로 해당 상태값을 전달
+		firebase.auth().onAuthStateChanged((userInfo) => {
+			console.log('userInfo', userInfo);
+			if(userInfo === null) dispatch(logoutUser);
+			else dispatch(loginUser(userInfo.multiFactor.user)) //store에 옮겨 담아
+		})
+	},[])
+
+	useEffect(() => {
+		//firebase의 로그인된 유저정보를 제거해서 강제 로그아웃 처리 (테스트 용도)
+		//firebase.auth().signOut();
+	},[])
 	
 	return (
 		<>
@@ -21,6 +42,8 @@ function App() {
 				{/* : 라우터에 params 설정 */}
 				<Route path='/detail/:num' element={<Detail />} />
 				<Route path='/edit/:num' element={<Edit />} />
+				<Route path='/join' element={<Join />} />
+				<Route path='/login' element={<Login />} />
 			</Routes>
 		</>
 	)

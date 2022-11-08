@@ -1,5 +1,6 @@
 import {useParams, Link, useNavigate} from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import Layout from '../common/Layout';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -16,7 +17,9 @@ const BtnSet = styled.div`
 
 `
 
+
 function Detail() {
+    const user = useSelector(store=>store.user)
     const navigate = useNavigate();
     // 라우터 파라미터로 전달되느 값을 받음
     const params = useParams();
@@ -63,12 +66,16 @@ function Detail() {
                     <DetailWrap>
                         <h2>{Detail.title}</h2>
                         <p>{Detail.content}</p>
+                        <span>Writer: {Detail.writer.displayName}</span>
                     </DetailWrap>
 
-                    <BtnSet>
+                    {user.accessToken !== '' && (
+                        <BtnSet>
                         <button><Link to={`/edit/${Detail.communityNum}`}>Edit</Link></button>
                         <button onClick={handleDelete}>Delete</button>
                     </BtnSet>
+                    )}
+                    
                 </>
             )
                 :<p>Loading . . .</p>
