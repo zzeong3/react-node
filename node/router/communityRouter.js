@@ -17,10 +17,8 @@ router.post('/create', (req, res) => {
       //현재 로그인된 사용자의 아이디로 User컬렉션으로부터 document를 찾고
       User.findOne({ uid: temp.uid }).exec()
         .then(doc => {
-          console.log(doc);
           //해당 document의 object.id값을 bodyParser객체에 writer키값에 등록
           temp.writer = doc._id;
-          
 
           //위에서 만들어진 최종 temp객체로 PostModel인스턴스 생서후 DB에 저장
           const PostModel = new Post(temp);

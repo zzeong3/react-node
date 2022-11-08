@@ -69,11 +69,11 @@ function Detail() {
                         <span>Writer: {Detail.writer.displayName}</span>
                     </DetailWrap>
 
-                    {user.accessToken !== '' && (
+                    {user.uid === Detail.writer.uid && (
                         <BtnSet>
                         <button><Link to={`/edit/${Detail.communityNum}`}>Edit</Link></button>
                         <button onClick={handleDelete}>Delete</button>
-                    </BtnSet>
+                        </BtnSet>
                     )}
                     
                 </>

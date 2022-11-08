@@ -13,6 +13,7 @@ function Create() {
   const handeCreate = () => {
     if (Tit.trim() === '' || Con.trim() === '') return alert('제목과 본문을 모두 입력하세요.');
     const item = { title: Tit, content: Con, uid: user.uid };
+    console.log(item);
 
     axios.post('/api/community/create', item)
       .then(res => {

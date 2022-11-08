@@ -48,7 +48,7 @@ function List() {
                                     {/* 글목록의 링크 URL, 글 고유번호를 params로 전달 */}
                                     <Link to={`/detail/${post.communityNum}`}>{post.title}</Link>
                                 </h2>
-                                <span>Writer: {post.write.displayName}</span>
+                                <span>Writer: {post.writer.displayName}</span>
                             </Item>
                         )
                     })
