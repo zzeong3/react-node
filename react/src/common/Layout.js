@@ -40,6 +40,10 @@ const MainWrap = styled.main`
           cursor:pointer;
           border:0;
 
+          &.on {
+            background:hotpink;
+          }
+
           a {
             color:#fff;
           }

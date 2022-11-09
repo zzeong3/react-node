@@ -56,6 +56,7 @@ function Detail() {
 
     useEffect(()=>{
         Object.keys(Detail).length !== 0 && setLoaded(true);
+        console.log(Detail);
     },[Detail])
 
 
@@ -66,7 +67,8 @@ function Detail() {
                     <DetailWrap>
                         <h2>{Detail.title}</h2>
                         <p>{Detail.content}</p>
-                        <span>Writer: {Detail.writer.displayName}</span>
+                        <p>Writer: {Detail.writer.displayName}</p>
+                        {Detail.createdAt === Detail.updatedAt ? <p>Posted : {Detail.createdAt.split('T')[0]}</p> : <p>Updated : {Detail.updatedAt.split('T')[0]}</p>}
                     </DetailWrap>
 
                     {user.uid === Detail.writer.uid && (
