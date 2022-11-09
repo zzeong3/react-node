@@ -41,6 +41,7 @@ function App() {
 				<Route path='/create' element={<Create />}/>
 				{/* : 라우터에 params 설정 */}
 				<Route path='/detail/:num' element={<Detail />} />
+				<Route path='/edit' element={<Edit />} />
 				<Route path='/edit/:num' element={<Edit />} />
 				<Route path='/join' element={<Join />} />
 				<Route path='/login' element={<Login />} />
